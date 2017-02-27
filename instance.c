@@ -152,6 +152,8 @@ SRD_API int srd_inst_option_set(struct srd_decoder_inst *di,
 		}
 		if (PyDict_SetItemString(py_di_options, sdo->id, py_optval) == -1)
 			goto err_out;
+		/* Reference was stolen */
+		py_optval = NULL;
 		/* Not harmful even if we used the default. */
 		g_hash_table_remove(options, sdo->id);
 	}
